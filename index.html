@@ -1,0 +1,418 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Indian Developer Salary Predictor</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    background: #080d1b;
+    color: white;
+    min-height: 100vh;
+}
+
+header {
+    padding: 22px 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #202b43;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: 800;
+    color: #61d9ff;
+}
+
+.logo span {
+    color: white;
+}
+
+header a {
+    color: #61d9ff;
+    text-decoration: none;
+}
+
+.hero {
+    text-align: center;
+    padding: 65px 20px 35px;
+}
+
+.hero h1 {
+    font-size: clamp(30px, 5vw, 48px);
+    margin-bottom: 15px;
+}
+
+.hero h1 span {
+    color: #61d9ff;
+}
+
+.hero p {
+    color: #aab6ce;
+    font-size: 16px;
+}
+
+.container {
+    max-width: 850px;
+    margin: 20px auto 60px;
+    padding: 0 18px;
+}
+
+.predictor {
+    background: #111a2e;
+    border: 1px solid #263653;
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 15px 50px #0005;
+}
+
+.predictor h2 {
+    margin-bottom: 25px;
+    color: #61d9ff;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.field label {
+    color: #d6e0f4;
+    font-size: 14px;
+}
+
+input, select {
+    width: 100%;
+    padding: 14px;
+    border-radius: 9px;
+    border: 1px solid #344665;
+    background: #0a1223;
+    color: white;
+    outline: none;
+    font-size: 15px;
+}
+
+input:focus, select:focus {
+    border-color: #61d9ff;
+}
+
+.full {
+    grid-column: 1 / -1;
+}
+
+button {
+    width: 100%;
+    margin-top: 25px;
+    padding: 16px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(90deg, #087cff, #16c8d9);
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .3s;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px #087cff55;
+}
+
+.result {
+    display: none;
+    margin-top: 25px;
+    padding: 25px;
+    border-radius: 14px;
+    background: #0a2130;
+    border: 1px solid #167d91;
+    text-align: center;
+}
+
+.result h3 {
+    color: #61d9ff;
+    margin-bottom: 15px;
+}
+
+.salary {
+    font-size: clamp(27px, 6vw, 40px);
+    font-weight: 800;
+    color: #5fffc0;
+    margin: 15px 0;
+}
+
+.result p {
+    color: #c3d2e6;
+    line-height: 1.8;
+}
+
+footer {
+    text-align: center;
+    padding: 25px;
+    color: #8594ad;
+    border-top: 1px solid #202b43;
+    font-size: 13px;
+}
+
+@media(max-width:600px) {
+    header {
+        padding: 18px;
+    }
+    .logo {
+        font-size: 17px;
+    }
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+    .predictor {
+        padding: 20px;
+    }
+    .hero {
+        padding-top: 45px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">AI <span>DEV SALARY</span></div>
+    <a href="#predictor">Predict Salary</a>
+</header>
+
+<section class="hero">
+    <h1>AI Indian Developer <span>Salary Predictor</span></h1>
+    <p>Discover your estimated developer salary in India using your skills and experience.</p>
+</section>
+
+<div class="container" id="predictor">
+
+<div class="predictor">
+    <h2>🚀 Developer Salary Prediction</h2>
+
+    <form id="salaryForm">
+        <div class="form-grid">
+
+            <div class="field">
+                <label>Developer Name</label>
+                <input type="text" id="name" placeholder="Enter your name" required>
+            </div>
+
+            <div class="field">
+                <label>Experience (Years)</label>
+                <input type="number" id="experience" min="0" max="40"
+                       placeholder="Example: 2" required>
+            </div>
+
+            <div class="field">
+                <label>Job Role</label>
+                <select id="role" required>
+                    <option value="">Select Job Role</option>
+                    <option value="frontend">Frontend Developer</option>
+                    <option value="backend">Backend Developer</option>
+                    <option value="fullstack">Full Stack Developer</option>
+                    <option value="ai">AI / ML Engineer</option>
+                    <option value="data">Data Scientist</option>
+                    <option value="mobile">App Developer</option>
+                    <option value="devops">DevOps Engineer</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label>Current City</label>
+                <select id="city" required>
+                    <option value="">Select City</option>
+                    <option value="bangalore">Bangalore</option>
+                    <option value="mumbai">Mumbai</option>
+                    <option value="delhi">Delhi NCR</option>
+                    <option value="hyderabad">Hyderabad</option>
+                    <option value="pune">Pune</option>
+                    <option value="chennai">Chennai</option>
+                    <option value="other">Other Cities</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label>Education</label>
+                <select id="education" required>
+                    <option value="">Select Education</option>
+                    <option value="btech">B.Tech / B.E.</option>
+                    <option value="mtech">M.Tech</option>
+                    <option value="bca">BCA / MCA</option>
+                    <option value="diploma">Diploma</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label>Company Type</label>
+                <select id="company" required>
+                    <option value="">Select Company Type</option>
+                    <option value="startup">Startup</option>
+                    <option value="service">IT Service Company</option>
+                    <option value="product">Product Company</option>
+                    <option value="mnc">MNC</option>
+                </select>
+            </div>
+
+            <div class="field full">
+                <label>Your Main Skills</label>
+                <input type="text" id="skills"
+                       placeholder="Example: Python, JavaScript, React, SQL">
+            </div>
+
+        </div>
+
+        <button type="submit">✨ Predict My Salary</button>
+    </form>
+
+    <div class="result" id="result">
+        <h3>🎉 Your Salary Prediction</h3>
+        <p id="greeting"></p>
+        <div class="salary" id="salary"></div>
+        <p id="details"></p>
+        <p id="disclaimer" style="font-size:12px;margin-top:12px;">
+            This is an indicative estimate, not a guaranteed salary.
+        </p>
+        <button onclick="resetForm()">Predict Again</button>
+    </div>
+</div>
+</div>
+
+<footer>
+    © 2026 AI Indian Developer Salary Predictor | Built with HTML, CSS & JavaScript
+</footer>
+
+<script>
+const form = document.getElementById("salaryForm");
+
+const roleSalary = {
+    frontend: 500000,
+    backend: 600000,
+    fullstack: 650000,
+    ai: 850000,
+    data: 750000,
+    mobile: 550000,
+    devops: 700000
+};
+
+const cityMultiplier = {
+    bangalore: 1.15,
+    mumbai: 1.12,
+    delhi: 1.08,
+    hyderabad: 1.10,
+    pune: 1.05,
+    chennai: 1.03,
+    other: 0.90
+};
+
+const companyMultiplier = {
+    startup: 0.90,
+    service: 0.95,
+    product: 1.20,
+    mnc: 1.25
+};
+
+form.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const name = document.getElementById("name").value.trim();
+    const experience = Number(document.getElementById("experience").value);
+    const role = document.getElementById("role").value;
+    const city = document.getElementById("city").value;
+    const education = document.getElementById("education").value;
+    const company = document.getElementById("company").value;
+    const skills = document.getElementById("skills").value;
+
+    if (!name || !role || !city || !education || !company ||
+        !Number.isFinite(experience) || experience < 0 ||
+        experience > 40) {
+        alert("Please enter valid details!");
+        return;
+    }
+
+    let salary = roleSalary[role];
+
+    // Experience factor
+    salary *= (1 + Math.min(experience, 15) * 0.17);
+
+    // City and company factors
+    salary *= cityMultiplier[city];
+    salary *= companyMultiplier[company];
+
+    // Skill bonus (maximum 20%)
+    const skillList = skills.split(",")
+        .map(s => s.trim())
+        .filter(s => s.length > 0);
+
+    const skillBonus = Math.min(skillList.length * 0.025, 0.20);
+    salary *= (1 + skillBonus);
+
+    // Education factor
+    const educationMultiplier = {
+        btech: 1.05,
+        mtech: 1.10,
+        bca: 0.95,
+        diploma: 0.90,
+        other: 0.95
+    };
+
+    salary *= educationMultiplier[education];
+
+    const minSalary = Math.round(salary * 0.85);
+    const maxSalary = Math.round(salary * 1.15);
+
+    const formatINR = number =>
+        "₹" + Math.round(number).toLocaleString("en-IN");
+
+    document.getElementById("greeting").innerText =
+        "Hello " + name + "! Your estimated annual salary is:";
+
+    document.getElementById("salary").innerText =
+        formatINR(minSalary) + " - " + formatINR(maxSalary);
+
+    document.getElementById("details").innerHTML =
+        "Experience: " + experience + " years<br>" +
+        "Skills added: " + skillList.length + "<br>" +
+        "Estimated monthly midpoint: " +
+        formatINR(salary / 12) + "<br>" +
+        "Prediction is based on your selected role, location, " +
+        "education, company type and skills.";
+
+    document.getElementById("result").style.display = "block";
+
+    document.getElementById("result").scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+});
+
+function resetForm() {
+    form.reset();
+    document.getElementById("result").style.display = "none";
+    document.getElementById("predictor").scrollIntoView({
+        behavior: "smooth"
+    });
+}
+</script>
+
+</body>
+</html>
